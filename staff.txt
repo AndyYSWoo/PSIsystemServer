@@ -1,0 +1,3 @@
+StockStaff;Pony;pony123
+SalesStaff;Cindy;cindy123
+FinancialStaff;Jackie;jackie123

@@ -10,7 +10,9 @@ public class PSIControl {
 	public static ArrayList<ExportEntry> exportList=new ArrayList<ExportEntry>();
 	public static ArrayList<StockEntry> stockList=new ArrayList<StockEntry>();
 	public static ArrayList<AccountEntry> accountList=new ArrayList<AccountEntry>();
-	
+	public static ArrayList<FinancialStaff> fSList=new ArrayList<FinancialStaff>();
+	public static ArrayList<SalesStaff> salesSList=new ArrayList<SalesStaff>();
+	public static ArrayList<StockStaff> stockSList=new ArrayList<StockStaff>();
 
 	public static ArrayList<Double> inPriceList=new ArrayList<Double>();
 	public static ArrayList<Double> outPriceList=new ArrayList<Double>();
@@ -27,6 +29,7 @@ public class PSIControl {
 	public static void main(String[] args) throws IOException, ParseException{
 		FileOperation fo=new FileOperation();
 		fo.fileReader();
+		new Server().go();
 		
 		while(!isOver){
 		Input ip=new Input();

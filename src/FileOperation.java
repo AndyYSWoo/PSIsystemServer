@@ -63,6 +63,22 @@ public class FileOperation {
 			bw9.write(Double.toString(PSIControl.accounter.getTDI())+";"+Double.toString(PSIControl.accounter.getTDO())+";"+Double.toString(PSIControl.accounter.getTA()));
 			bw9.close();
 			
+			FileWriter fw10=new FileWriter("staff.txt",false);
+			BufferedWriter bw10=new BufferedWriter(fw10);
+			for(StockStaff stockStaff: PSIControl.stockSList){
+				bw10.write("StockStaff;"+stockStaff.getName()+";"+stockStaff.getPassword());
+				bw10.newLine();
+			}
+			for(SalesStaff salesStaff: PSIControl.salesSList){
+				bw10.write("SalesStaff;"+salesStaff.getName()+";"+salesStaff.getPassword());
+				bw10.newLine();
+			}
+			for(FinancialStaff fiStaff: PSIControl.fSList){
+				bw10.write("FinancialStaff;"+fiStaff.getName()+";"+fiStaff.getPassword());
+				bw10.newLine();
+			}
+			bw10.close();
+			
 			}catch(IOException e){
 			e.printStackTrace();
 		}
@@ -257,6 +273,39 @@ public class FileOperation {
 			PSIControl.accounter.setTA(total);
 			br.close();
 		}
+	}
+	
+	{String fileInput;
+	
+	BufferedReader br = new BufferedReader( new FileReader(new File("staff.txt")));
+	
+		while((fileInput=br.readLine())!=null){
+			String[] fileArray=fileInput.split(";");
+		
+			String ID=fileArray[0];
+			String name=fileArray[1];
+			String password=fileArray[2];
+			if(ID.equals("StockStaff")){
+				StockStaff staff=new StockStaff();
+				staff.setName(name);
+				staff.setPassword(password);
+				PSIControl.stockSList.add(staff);
+			}
+			else if(ID.equals("SalesStaff")){
+				SalesStaff staff=new SalesStaff();
+				staff.setName(name);
+				staff.setPassword(password);
+				PSIControl.salesSList.add(staff);
+			}
+			else if(ID.equals("FinancialStaff")){
+				FinancialStaff staff=new FinancialStaff();
+				staff.setName(name);
+				staff.setPassword(password);
+				PSIControl.fSList.add(staff);
+			}
+		
+		}
+		br.close();
 	}
 
 
