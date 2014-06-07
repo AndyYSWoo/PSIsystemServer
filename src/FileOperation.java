@@ -1,89 +1,98 @@
 import java.io.*;
 
-
-
-
-
-
-
 public class FileOperation {
-	public void fileWriter(){
+	
+	public void writeCommodity(){
 		try{
-			FileWriter fw1=new FileWriter("commodity.txt",false);
-			BufferedWriter bw1=new BufferedWriter(fw1);
-			for(Commodity com: PSIControl.commodityList){
-				bw1.write(com.getName()+";"+com.getMode()+";"+com.getNum()+";"+com.getDIP()+";"+com.getDOP()+";"+com.getLIP()+";"+com.getLOP());
-				bw1.newLine();
-				}
-			bw1.close();
-
-			FileWriter fw2=new FileWriter("stock.txt",false);
-			BufferedWriter bw2=new BufferedWriter(fw2);
-			for(StockEntry se: PSIControl.stockList){
-				bw2.write(se.getName()+";"+se.getMode()+";"+se.getInNum()+";"+se.getAIP()+";"+se.getTIP()+";"+se.getOutNum()+";"+se.getOutPrice()+";"+se.getTOP()+";"+se.getNIS()+";"+se.getAPIS()+";"+se.getTPIS());
-				bw2.newLine();
-				}
-			bw2.close();
-			
-			FileWriter fw3=new FileWriter("import.txt",false);
-			BufferedWriter bw3=new BufferedWriter(fw3);
-			for(ImportEntry ie: PSIControl.importList){
-				bw3.write(ie.getDate()+";"+ie.getStatus()+";"+ie.getClient()+";"+ie.getName()+";"+ie.getMode()+";"+ie.getNum()+";"+ie.getAP()+";"+ie.getTP());
-				bw3.newLine();
-				}
-			bw3.close();
-			
-			FileWriter fw4=new FileWriter("export.txt",false);
-			BufferedWriter bw4=new BufferedWriter(fw4);
-			for(ExportEntry ee: PSIControl.exportList){
-				bw4.write(ee.getDate()+";"+ee.getStatus()+";"+ee.getClient()+";"+ee.getName()+";"+ee.getMode()+";"+ee.getNum()+";"+ee.getAP()+";"+ee.getTP());
-				bw4.newLine();
-				}
-			bw4.close();
-			
-			FileWriter fw5=new FileWriter("customer.txt",false);
-			BufferedWriter bw5=new BufferedWriter(fw5);
-			for(Customer cus: PSIControl.customerList){
-				bw5.write(cus.getName()+";"+cus.getPhoneNum()+";"+cus.getDueIn()+";"+cus.getDueOut()+";"+cus.getTotal());
-				bw5.newLine();
-				}
-			bw5.close();
-			
-			FileWriter fw6=new FileWriter("accountentry.txt",false);
-			BufferedWriter bw6=new BufferedWriter(fw6);
-			for(AccountEntry ae: PSIControl.accountList){
-				bw6.write(ae.getDate()+";"+ae.getStatus()+";"+ae.getClient()+";"+ae.getAmount());
-				bw6.newLine();
-				}
-			bw6.close();
-			
-
-			FileWriter fw9=new FileWriter("accounter.txt",false);
-			BufferedWriter bw9=new BufferedWriter(fw9);
-			bw9.write(Double.toString(PSIControl.accounter.getTDI())+";"+Double.toString(PSIControl.accounter.getTDO())+";"+Double.toString(PSIControl.accounter.getTA()));
-			bw9.close();
-			
-			FileWriter fw10=new FileWriter("staff.txt",false);
-			BufferedWriter bw10=new BufferedWriter(fw10);
-			for(StockStaff stockStaff: PSIControl.stockSList){
-				bw10.write("StockStaff;"+stockStaff.getName()+";"+stockStaff.getPassword());
-				bw10.newLine();
+			FileWriter fw=new FileWriter("commodity.txt",false);
+		BufferedWriter bw=new BufferedWriter(fw);
+		for(Commodity com: PSIControl.commodityList){
+			bw.write(com.getName()+";"+com.getMode()+";"+com.getNum()+";"+com.getDIP()+";"+com.getDOP()+";"+com.getLIP()+";"+com.getLOP());
+			bw.newLine();
 			}
-			for(SalesStaff salesStaff: PSIControl.salesSList){
-				bw10.write("SalesStaff;"+salesStaff.getName()+";"+salesStaff.getPassword());
-				bw10.newLine();
-			}
-			for(FinancialStaff fiStaff: PSIControl.fSList){
-				bw10.write("FinancialStaff;"+fiStaff.getName()+";"+fiStaff.getPassword());
-				bw10.newLine();
-			}
-			bw10.close();
-			
-			}catch(IOException e){
-			e.printStackTrace();
-		}
-		
+		bw.close();
+		}catch(IOException e){e.printStackTrace();}
 	}
+	
+	public void writeStock(){
+		try{
+			FileWriter fw=new FileWriter("stock.txt",false);
+		BufferedWriter bw=new BufferedWriter(fw);
+		for(StockEntry se: PSIControl.stockList){
+			bw.write(se.getName()+";"+se.getMode()+";"+se.getInNum()+";"+se.getAIP()+";"+se.getTIP()+";"+se.getOutNum()+";"+se.getOutPrice()+";"+se.getTOP()+";"+se.getNIS()+";"+se.getAPIS()+";"+se.getTPIS());
+			bw.newLine();
+			}
+		bw.close();
+		}catch(IOException e){e.printStackTrace();}
+	}
+	
+	public void writeImport(){
+		try{FileWriter fw=new FileWriter("import.txt",false);
+		BufferedWriter bw=new BufferedWriter(fw);
+		for(ImportEntry ie: PSIControl.importList){
+			bw.write(ie.getDate()+";"+ie.getStatus()+";"+ie.getClient()+";"+ie.getName()+";"+ie.getMode()+";"+ie.getNum()+";"+ie.getAP()+";"+ie.getTP());
+			bw.newLine();
+			}
+		bw.close();}catch(IOException e){e.printStackTrace();}
+	}
+	
+	public void writeExport(){
+		try{FileWriter fw=new FileWriter("export.txt",false);
+		BufferedWriter bw=new BufferedWriter(fw);
+		for(ExportEntry ee: PSIControl.exportList){
+			bw.write(ee.getDate()+";"+ee.getStatus()+";"+ee.getClient()+";"+ee.getName()+";"+ee.getMode()+";"+ee.getNum()+";"+ee.getAP()+";"+ee.getTP());
+			bw.newLine();
+			}
+		bw.close();}catch(IOException e){e.printStackTrace();}
+	}
+
+	public void writeCustomer(){
+		try{FileWriter fw=new FileWriter("customer.txt",false);
+		BufferedWriter bw=new BufferedWriter(fw);
+		for(Customer cus: PSIControl.customerList){
+			bw.write(cus.getName()+";"+cus.getPhoneNum()+";"+cus.getDueIn()+";"+cus.getDueOut()+";"+cus.getTotal());
+			bw.newLine();
+			}
+		bw.close();}catch(IOException e){e.printStackTrace();}
+	}
+	
+	public void writeAccountEntry(){
+		try{FileWriter fw=new FileWriter("accountentry.txt",false);
+		BufferedWriter bw=new BufferedWriter(fw);
+		for(AccountEntry ae: PSIControl.accountList){
+			bw.write(ae.getDate()+";"+ae.getStatus()+";"+ae.getClient()+";"+ae.getAmount());
+			bw.newLine();
+			}
+		bw.close();}catch(IOException e){e.printStackTrace();}
+	}
+	
+	public void writeAccount(){
+		try{FileWriter fw=new FileWriter("accounter.txt",false);
+		BufferedWriter bw=new BufferedWriter(fw);
+		bw.write(Double.toString(PSIControl.accounter.getTDI())+";"+Double.toString(PSIControl.accounter.getTDO())+";"+Double.toString(PSIControl.accounter.getTA()));
+		bw.close();
+		}catch(IOException e){e.printStackTrace();}
+	}
+	
+	public void writeStaff(){
+		try{FileWriter fw=new FileWriter("staff.txt",false);
+		BufferedWriter bw=new BufferedWriter(fw);
+		for(StockStaff stockStaff: PSIControl.stockSList){
+			bw.write("StockStaff;"+stockStaff.getName()+";"+stockStaff.getPassword());
+			bw.newLine();
+		}
+		for(SalesStaff salesStaff: PSIControl.salesSList){
+			bw.write("SalesStaff;"+salesStaff.getName()+";"+salesStaff.getPassword());
+			bw.newLine();
+		}
+		for(FinancialStaff fiStaff: PSIControl.fSList){
+			bw.write("FinancialStaff;"+fiStaff.getName()+";"+fiStaff.getPassword());
+			bw.newLine();
+		}
+		bw.close();
+		}catch(IOException e){e.printStackTrace();}
+	}
+	
 	public void fileReader() throws NumberFormatException, IOException{
 		{String fileInput;
 		

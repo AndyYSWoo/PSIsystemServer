@@ -25,6 +25,7 @@ public class Stock {
 		}
 		
 	}
+	
 
 	public void shoStockEntry() {
 		for(StockEntry se:PSIControl.stockList){

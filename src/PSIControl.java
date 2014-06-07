@@ -25,18 +25,10 @@ public class PSIControl {
 	public static Stock stock=new Stock();
 	public static CustomerRelationManager crm=new CustomerRelationManager();
 	public static Accounter accounter=new Accounter();
-	
+	public static FileOperation fo;
 	public static void main(String[] args) throws IOException, ParseException{
-		FileOperation fo=new FileOperation();
+		fo=new FileOperation();
 		fo.fileReader();
 		new Server().go();
-		
-		while(!isOver){
-		Input ip=new Input();
-		String input=ip.getInput();
-		ip.analyseInput(input);
-		fo.fileWriter();
 		}
-		
-	}
 }

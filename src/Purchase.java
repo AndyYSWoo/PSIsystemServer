@@ -13,7 +13,7 @@ public class Purchase {
 		String mode=info[2];
 		int num=Integer.parseInt(info[3]);
 		double averagePrice=Double.parseDouble(info[4]);
-//创建单子		
+//================Create Entry================		
 		ImportEntry ie=new ImportEntry();
 		ie.setDate(date);
 		ie.setClient(client);
@@ -24,7 +24,7 @@ public class Purchase {
 		ie.setStatus("ADD");
 		ie.setTP(num*averagePrice);
 		PSIControl.importList.add(ie);
-//修改库存
+//================Change Stock================
 		for(StockEntry se:PSIControl.stockList){
 			if(se.getMode().equals(mode)){
 				se.setInNum(se.getInNum()+num);
@@ -35,27 +35,29 @@ public class Purchase {
 				se.setAPIS((se.getTIP()-se.getTOP())/(se.getInNum()-se.getOutNum()));
 			}
 		}
-//修改商品信息
+//================Change Commodity================
 		for(Commodity com:PSIControl.commodityList){
 			if(com.getMode().equals(mode)){
 				com.setNum(com.getNum()+num);
 				com.setLIP(averagePrice);
 			}
 		}
-//修改客户信息
+//================Change Customer================
 		for(Customer cus:PSIControl.customerList){
 			if(cus.getName().equals(client)){
 				cus.setDueOut(cus.getDueOut()+num*averagePrice);
 				cus.setTotal(cus.getDueIn()-cus.getDueOut());
+			
+//================Change Account================
 			}
-//修改账目
-		PSIControl.accounter.setTDO(PSIControl.accounter.getTDO()+num*averagePrice);
 		}
+		PSIControl.accounter.setTDO(PSIControl.accounter.getTDO()+num*averagePrice);
+		
 
 	}
 /**
  * 
- * DEL为ADD严格反操作!!
+ * DEL is an undo
  */
 	public void importDel(String information) {
 		Calendar c1 = Calendar.getInstance();
@@ -68,7 +70,7 @@ public class Purchase {
 		String mode=info[2];
 		int num=Integer.parseInt(info[3]);
 		double averagePrice=Double.parseDouble(info[4]);
-//创建单子		
+//================Create Entry================
 		ImportEntry ie=new ImportEntry();
 		ie.setDate(date);
 		ie.setClient(client);
@@ -79,7 +81,7 @@ public class Purchase {
 		ie.setTP(num*averagePrice);
 		ie.setStatus("DEL");
 		PSIControl.importList.add(ie);
-//修改库存
+//================Change stock================
 		for(StockEntry se:PSIControl.stockList){
 			if(se.getMode().equals(mode)){
 				se.setInNum(se.getInNum()-num);
@@ -90,7 +92,7 @@ public class Purchase {
 				se.setAPIS((se.getTIP()-se.getTOP())/(se.getInNum()-se.getOutNum()));
 					}
 				}
-//修改商品信息
+//================Change commodity================
 		for(Commodity com:PSIControl.commodityList){
 			if(com.getMode().equals(mode)){
 				com.setNum(com.getNum()-num);
@@ -107,14 +109,14 @@ public class Purchase {
 				
 					}
 				}
-//修改客户信息
+//================Change customer================
 		for(Customer cus:PSIControl.customerList){
 			if(cus.getName().equals(client)){
 				cus.setDueOut(cus.getDueOut()-ie.getTP());
 				cus.setTotal(cus.getTotal()-cus.getDueIn());
 					}
 				}
-//修改公司账目
+//================Change Account================
 		PSIControl.accounter.setTDO(PSIControl.accounter.getTDO()-num*averagePrice);
 		
 	}
